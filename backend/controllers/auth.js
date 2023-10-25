@@ -32,7 +32,7 @@ router.post("/register", async (req, res) => {
       { id: newUser._id, email: newUser.email },
       process.env.JWT_SECRET,
       {
-        expiresIn: "7d",
+        expiresIn: "12h",
       }
     );
     res.status(201).json({ message: "New user created" });
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
           { id: user._id, email: user.email },
           process.env.JWT_SECRET,
           {
-            expiresIn: "7d",
+            expiresIn: "12h",
           }
         );
         // Save the token to a cookie and send a response
