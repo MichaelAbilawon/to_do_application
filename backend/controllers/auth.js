@@ -1,5 +1,3 @@
-/////////////653a4f922c3d8b345ca4066a
-
 const express = require("express");
 const user = require("../models/user");
 const bcrypt = require("bcrypt");
@@ -7,8 +5,13 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
+const path = require("path");
+const ejs = require("ejs");
 app.use(express.json());
 app.use(cookieParser());
+
+app.set("view engine", ejs);
+app.set("views", path.join(__dirname, "views"));
 
 const router = express.Router();
 const winston = require("winston");
@@ -16,6 +19,14 @@ const logger = winston.createLogger({
   level: "info",
   format: winston.format.simple(),
   transports: [new winston.transports.Console()],
+});
+
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
 });
 
 router.post("/register", async (req, res) => {

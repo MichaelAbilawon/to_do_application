@@ -5,5 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo app</title>
   </head>
-  <body></body>
+  <body>
+    <h1>My To do List</h1>
+    <ul>
+      <% todos.forEach(function(todo) {%>
+      <li><%= todo %></li>li></li>
+      <% }); %>
+    </ul>
+  </body>
 </html>
