@@ -1,0 +1,12 @@
+error: Error in creating a task: Cannot access 'task' before initialization {"timestamp":"2023-10-26T11:50:32.622Z"}
+error: Error in creating a task: Cannot access 'task' before initialization {"timestamp":"2023-10-26T11:59:27.712Z"}
+error: Error in creating a task: title is not defined {"timestamp":"2023-10-26T12:01:29.979Z"}
+info: Task created by ma@gmail.com: Hearing twice {"timestamp":"2023-10-26T12:06:24.642Z"}
+info: Task created by ma@gmail.com: send a message {"timestamp":"2023-10-26T12:11:21.466Z"}
+info: Task completed by undefined: send a message {"timestamp":"2023-10-26T12:14:57.856Z"}
+info: Task created by ma@gmail.com: task {"timestamp":"2023-10-26T12:19:04.178Z"}
+info: Task completed by 653a4f922c3d8b345ca4066a: task {"timestamp":"2023-10-26T12:24:42.738Z"}
+info: Task edited by undefined: task {"timestamp":"2023-10-26T12:25:40.043Z"}
+info: Task completed by 653a4f922c3d8b345ca4066a: task {"timestamp":"2023-10-26T12:28:37.024Z"}
+info: Task deleted by 653a4f922c3d8b345ca4066a: task {"timestamp":"2023-10-26T12:29:12.246Z"}
+info: Task deleted by 653a4f922c3d8b345ca4066a: send a message {"timestamp":"2023-10-26T12:33:52.611Z"}

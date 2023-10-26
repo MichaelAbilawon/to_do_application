@@ -3,6 +3,8 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const app = express();
 const cookieParser = require("cookie-parser");
+const router = require("./controllers/auth");
+const taskRouter = require("./controllers/task");
 
 dotenv.config();
 
@@ -23,6 +25,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.set(express.static("public"));
 app.set("view engine", "ejs");
+
+app.use("/auth", router);
+app.use("/task", taskRouter);
 app.listen(3000, () =>
   console.log(`Server is connected successfully at port ${port}`)
 );

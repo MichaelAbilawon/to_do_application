@@ -1,5 +1,7 @@
+/////////////653a4f922c3d8b345ca4066a
+
 const express = require("express");
-const user = require("../models/User");
+const user = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
@@ -8,9 +10,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-const { log } = require("winston");
-const winston = require("winston/lib/winston/config");
 const router = express.Router();
+const winston = require("winston");
+const logger = winston.createLogger({
+  level: "info",
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console()],
+});
 
 router.post("/register", async (req, res) => {
   //Handles user registeration
@@ -22,7 +28,7 @@ router.post("/register", async (req, res) => {
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = new user({
-      username: req.body.firstname,
+      username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
     });
@@ -37,7 +43,7 @@ router.post("/register", async (req, res) => {
     );
     res.status(201).json({ message: "New user created" });
   } catch (error) {
-    winston.error(`Error in register: ${error.message}`);
+    logger.error(`Error in register: ${error.message}`);
     res.status(500).json({ error: "Registration failed" });
   }
 });
@@ -47,13 +53,16 @@ router.post("/login", async (req, res) => {
   try {
     // Check if user exists
     console.log("Login request received");
-    const user = await user.findOne({ email: req.body.email });
-    if (!user) {
+    const existingUser = await user.findOne({ email: req.body.email });
+    if (!existingUser) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
     // Check if password is correct
     else {
-      const validPass = bcrypt.compareSync(req.body.password, user.password);
+      const validPass = await bcrypt.compare(
+        req.body.password,
+        existingUser.password
+      );
       if (!validPass) {
         return res.status(400).json({ error: "Invalid email or password" });
       }
@@ -61,7 +70,7 @@ router.post("/login", async (req, res) => {
       // Generate JWT
       else {
         const token = jwt.sign(
-          { id: user._id, email: user.email },
+          { id: existingUser._id, email: existingUser.email },
           process.env.JWT_SECRET,
           {
             expiresIn: "12h",
@@ -73,7 +82,7 @@ router.post("/login", async (req, res) => {
       }
     }
   } catch (error) {
-    winston.error(`Error in login: ${error.message}`);
+    logger.error(`Error in login: ${error.message}`);
 
     res.status(500).json({ error: "Server error" });
   }

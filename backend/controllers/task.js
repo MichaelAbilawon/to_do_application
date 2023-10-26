@@ -2,8 +2,7 @@ const express = require("express");
 const taskRouter = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const winston = require("./logger");
-const task = require("../models/Task");
-const Task = require("../models/Task");
+const Task = require("../models/task");
 
 taskRouter.post("/", verifyToken, async (req, res) => {
   const { name, state, description } = req.body;
@@ -20,10 +19,10 @@ taskRouter.post("/", verifyToken, async (req, res) => {
     }
 
     //Create the new task
-    const newTask = new task({
+    const newTask = new Task({
       name,
       description,
-      state: "draft", // Initially in draft state
+      state: "pending", // Initially in draft state
       author,
     });
 
@@ -31,7 +30,7 @@ taskRouter.post("/", verifyToken, async (req, res) => {
     const task = await newTask.save();
 
     // Log the creation of the task
-    winston.info(`Task created by ${req.user.email}: ${title}`);
+    winston.info(`Task created by ${req.user.email}: ${name}`);
 
     return res.status(201).json(task);
   } catch (error) {
@@ -64,8 +63,10 @@ taskRouter.get("/mytasks", verifyToken, async (req, res) => {
 });
 
 // Complete a task
-taskRouter.put("/publish/:id", verifyToken, async (req, res) => {
+taskRouter.put("/complete/:id", verifyToken, async (req, res) => {
   const TaskId = req.params.id;
+  const author = req.user.id;
+  console.log(author);
 
   try {
     const task = await Task.findById(TaskId);
@@ -86,7 +87,7 @@ taskRouter.put("/publish/:id", verifyToken, async (req, res) => {
     await task.save();
 
     // Log the publication of the task
-    winston.info(`Task completed by ${req.user.username}: ${task.title}`);
+    winston.info(`Task completed by ${author}: ${task.name}`);
 
     res.json(task);
   } catch (error) {
@@ -123,7 +124,7 @@ taskRouter.put("/updateTask/:id", verifyToken, async (req, res) => {
     await task.save();
 
     // Log the update of the task
-    winston.info(`Task edited by ${req.user.username}: ${task.title}`);
+    winston.info(`Task edited by ${req.user.id}: ${task.name}`);
 
     res.json(task);
   } catch (error) {
@@ -152,7 +153,7 @@ taskRouter.delete("/deleteTask/:id", verifyToken, async (req, res) => {
     await task.deleteOne();
 
     // Log the deletion of the task
-    winston.info(`Task deleted by ${req.user.username}: ${task.title}`);
+    winston.info(`Task deleted by ${req.user.id}: ${task.name}`);
 
     res.json({ msg: "Task Successfully deleted" });
   } catch (error) {
