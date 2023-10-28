@@ -39,3 +39,5 @@ app.get("/", (req, res) => {
 app.listen(3000, () =>
   console.log(`Server is connected successfully at port ${port}`)
 );
+
+module.exports = app;

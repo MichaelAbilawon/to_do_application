@@ -4,6 +4,7 @@ const verifyToken = require("../middlewares/verifyToken");
 const winston = require("./logger");
 const Task = require("../models/task");
 
+//Create new task
 taskRouter.post("/", verifyToken, async (req, res) => {
   const { name, state, description } = req.body;
   const author = req.user.id;

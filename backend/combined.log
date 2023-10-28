@@ -10,3 +10,14 @@ info: Task edited by undefined: task {"timestamp":"2023-10-26T12:25:40.043Z"}
 info: Task completed by 653a4f922c3d8b345ca4066a: task {"timestamp":"2023-10-26T12:28:37.024Z"}
 info: Task deleted by 653a4f922c3d8b345ca4066a: task {"timestamp":"2023-10-26T12:29:12.246Z"}
 info: Task deleted by 653a4f922c3d8b345ca4066a: send a message {"timestamp":"2023-10-26T12:33:52.611Z"}
+info: Task created by mabilawon@gmail.com: Brothers meeting {"timestamp":"2023-10-28T05:46:01.379Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T05:53:32.849Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T06:36:36.907Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T06:40:19.107Z"}
+error: Error in creating a task: Operation `tasks.insertOne()` buffering timed out after 10000ms {"timestamp":"2023-10-28T06:42:30.302Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T06:47:48.933Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:00:57.133Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:03:40.871Z"}
+error: Error in creating a task: Operation `tasks.insertOne()` buffering timed out after 10000ms {"timestamp":"2023-10-28T07:08:11.992Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:27:01.551Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:28:40.304Z"}
