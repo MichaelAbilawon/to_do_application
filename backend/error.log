@@ -3,3 +3,5 @@ error: Error in creating a task: Cannot access 'task' before initialization {"ti
 error: Error in creating a task: title is not defined {"timestamp":"2023-10-26T12:01:29.979Z"}
 error: Error in creating a task: Operation `tasks.insertOne()` buffering timed out after 10000ms {"timestamp":"2023-10-28T06:42:30.302Z"}
 error: Error in creating a task: Operation `tasks.insertOne()` buffering timed out after 10000ms {"timestamp":"2023-10-28T07:08:11.992Z"}
+error: Error in creating a task: Cannot set headers after they are sent to the client {"timestamp":"2023-10-29T20:46:28.725Z"}
+error: Error in creating a task: Cannot set headers after they are sent to the client {"timestamp":"2023-10-29T20:52:28.743Z"}

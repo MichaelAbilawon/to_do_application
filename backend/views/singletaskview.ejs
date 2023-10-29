@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        text-align: center;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      a {
+        text-decoration: none;
+        color: #007bff;
+        font-weight: bold;
+        margin-top: 20px;
+        display: inline-block;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        padding: 10px 20px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      a:hover {
+        background-color: #007bff;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Task Details</h1>
+    <ul>
+      <li>
+        <strong>Name:</strong> <%= task.name %>
+      </li>
+      <li>
+        <strong>Description:</strong> <%= task.description %>
+      </li>
+      <li>
+        <strong>Status:</strong>
+        <form action="/task/update/<%= task._id %>" method="post">
+          <select name="state">
+            <option value="pending" <%= task.state === "pending" ? "selected" : "" %>>
+              Pending
+            </option>
+            <option value="completed" <%= task.state === "completed" ? "selected" : "" %>>
+              Completed
+            </option>
+            <option value="deleted" <%= task.state === "deleted" ? "selected" : "" %>>
+              Deleted
+            </option>
+          </select>
+          <button type="submit">Update</button>
+        </form>
+      </li>
+      <li>
+        <form action="/task/delete/<%= task._id %>" method="post">
+          <button type="submit" onclick="return confirm('Are you sure you want to delete this task?')">Delete</button>
+        </form>
+      </li>
+    </ul>
+    <a href="/auth/dashboard">Back to Dashboard</a>
+  </body>
+</html>

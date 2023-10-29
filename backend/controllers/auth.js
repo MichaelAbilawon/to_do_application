@@ -5,11 +5,12 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
+const verifyToken = require("../middlewares/verifyToken");
 const path = require("path");
 const ejs = require("ejs");
 app.use(express.json());
 app.use(cookieParser());
-
+const Task = require("../models/task");
 app.set("view engine", ejs);
 app.set("views", path.join(__dirname, "views"));
 
@@ -28,6 +29,23 @@ router.get("/register", (req, res) => {
 router.get("/login", (req, res) => {
   res.render("login");
 });
+
+router.get("/dashboard", verifyToken, async (req, res) => {
+  // Fetch the user's tasks
+  try {
+    console.log("User:", req.user);
+    const userId = req.user.id;
+    const tasks = await Task.find({ author: userId });
+    console.log("Tasks:", tasks);
+    res.render("dashboard", { tasks: tasks, user: req.user });
+  } catch (error) {
+    // Handle any potential errors, e.g., database connection issues
+    console.error("Error fetching tasks:", error);
+    res.status(500).send("Error fetching tasks");
+  }
+});
+
+// Register a new user
 
 router.post("/register", async (req, res) => {
   //Handles user registeration
@@ -64,7 +82,9 @@ router.post("/login", async (req, res) => {
   try {
     // Check if user exists
     console.log("Login request received");
-    const existingUser = await user.findOne({ email: req.body.email });
+    const existingUser = await user
+      .findOne({ email: req.body.email })
+      .maxTimeMS(15000);
     if (!existingUser) {
       return res.status(400).json({ error: "Invalid email or password" });
     }
@@ -89,7 +109,7 @@ router.post("/login", async (req, res) => {
         );
         // Save the token to a cookie and send a response
         res.cookie("token", token, { httpOnly: true });
-        res.status(200).json({ message: "Logged in successfully" });
+        res.render("dashboard", { user: existingUser });
       }
     }
   } catch (error) {
@@ -99,4 +119,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Logout route
+router.post("/logout", (req, res) => {
+  req.clearCookie("token");
+  // Redirect the user to the login page
+  res.redirect("/auth/login");
+});
+
+module.exports = router;
 module.exports = router;

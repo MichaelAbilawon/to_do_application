@@ -4,16 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo Homepage</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+      }
+      header {
+        background: #50b3a2;
+        color: white;
+        padding-top: 30px;
+        min-height: 70px;
+        border-bottom: #e8491d 3px solid;
+      }
+      header a {
+        color: #ffffff;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 16px;
+      }
+      header li {
+        float: left;
+        display: inline;
+        padding: 0 20px 0 20px;
+      }
+      header #branding {
+        float: left;
+      }
+      header #branding h1 {
+        margin: 0;
+      }
+      header nav {
+        float: right;
+        margin-top: 10px;
+      }
+      header .highlight,
+      header .current a {
+        color: #e8491d;
+        font-weight: bold;
+      }
+    </style>
   </head>
   <body>
-    <h1>Welcome to the Todo app😉</h1>
-    <p>Keep track of your tasks with the easy to use app.</p>
-    <ul>
-      <li>
-        <a href="/auth/register">Register</a>
-        <a href="/auth/login">Login</a>
-        <a href="/task/">Create new task</a>
-      </li>
-    </ul>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1>Todo App</h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="/auth/register">Register</a></li>
+            <li><a href="/auth/login">Login</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Welcome to the Todo app</h2>
+      <p>Keep track of your tasks with the easy to use app.</p>
+      <p>Register or Login to start creating tasks.</p>
+    </div>
   </body>
 </html>

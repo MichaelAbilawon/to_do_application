@@ -3,9 +3,15 @@ const taskRouter = express.Router();
 const verifyToken = require("../middlewares/verifyToken");
 const winston = require("./logger");
 const Task = require("../models/task");
+const cookieParser = require("cookie-parser");
+
+// Create a task (GET route to render the task creatiuon form)
+taskRouter.get("/create", verifyToken, (req, res) => {
+  res.render("taskcreation");
+});
 
 //Create new task
-taskRouter.post("/", verifyToken, async (req, res) => {
+taskRouter.post("/create", verifyToken, async (req, res) => {
   const { name, state, description } = req.body;
   const author = req.user.id;
 
@@ -33,7 +39,8 @@ taskRouter.post("/", verifyToken, async (req, res) => {
     // Log the creation of the task
     winston.info(`Task created by ${req.user.email}: ${name}`);
 
-    return res.status(201).json(task);
+    //Render the success view
+    res.render("taskcreated", { task });
   } catch (error) {
     winston.error(`Error in creating a task: ${error.message}`);
     return res.status(500).json({ error: "Server error" });
@@ -42,6 +49,7 @@ taskRouter.post("/", verifyToken, async (req, res) => {
 
 // Get a list of the user's tasks
 taskRouter.get("/mytasks", verifyToken, async (req, res) => {
+  const isTaskDeleted = req.query.deleted === true;
   const userId = req.user.id; //this is to extract the user ID from the token
   const { page = 1, perPage = 20, state } = req.query;
 
@@ -55,11 +63,28 @@ taskRouter.get("/mytasks", verifyToken, async (req, res) => {
         .limit(perPage),
       Task.countDocuments(query), //This is to count the total number of tasks
     ]);
-    res.status(200).json({ total, tasks });
+
+    res.render("allTasks", { tasks: tasks, isTaskDeleted });
   } catch (error) {
     res
       .status(500)
       .json({ message: "Error fetching tasks", error: error.message });
+  }
+});
+// Route to view a single task
+taskRouter.get("/view/:taskId", verifyToken, async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const task = await Task.findById(taskId);
+
+    if (!task) {
+      return res.status(404).send("Task not found");
+    }
+
+    res.render("singletaskView", { task: task });
+  } catch (error) {
+    console.error("Error fetching task:", error);
+    res.status(500).send("Error fetching task");
   }
 });
 
@@ -160,6 +185,50 @@ taskRouter.delete("/deleteTask/:id", verifyToken, async (req, res) => {
   } catch (error) {
     winston.error(`Error in deleting a task: ${error.message}`);
     res.status(500).json({ error: "Server error" });
+  }
+});
+
+taskRouter.post("/delete/:taskId", verifyToken, async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+
+    // Delete the task from the database
+    const deletedTask = await Task.findByIdAndDelete(taskId);
+
+    if (!deletedTask) {
+      return res.status(404).send("Task not found");
+    }
+
+    // Redirect back to the dashboard or another suitable page
+    res.redirect("/task/mytasks?deleted=true");
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    res.status(500).send("Error deleting task");
+  }
+});
+
+// Add this route to task.js
+taskRouter.post("/update/:taskId", verifyToken, async (req, res) => {
+  try {
+    const taskId = req.params.taskId;
+    const newTaskState = req.body.state;
+
+    // Update the task's state in the database
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { state: newTaskState },
+      { new: true }
+    );
+
+    if (!updatedTask) {
+      return res.status(404).send("Task not found");
+    }
+
+    // Redirect back to the task details page
+    res.redirect(`/task/mytasks`);
+  } catch (error) {
+    console.error("Error updating task:", error);
+    res.status(500).send("Error updating task");
   }
 });
 

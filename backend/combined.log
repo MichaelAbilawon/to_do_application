@@ -21,3 +21,14 @@ info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07
 error: Error in creating a task: Operation `tasks.insertOne()` buffering timed out after 10000ms {"timestamp":"2023-10-28T07:08:11.992Z"}
 info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:27:01.551Z"}
 info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:28:40.304Z"}
+info: Task created by mabilawon@gmail.com: Test Task {"timestamp":"2023-10-28T07:39:49.157Z"}
+info: Task created by test1@test.com: Test Task {"timestamp":"2023-10-29T00:37:54.693Z"}
+info: Task created by test1@test.com: Test Task {"timestamp":"2023-10-29T00:44:14.663Z"}
+info: Task created by mabilawon@gmail.com: Bible reading {"timestamp":"2023-10-29T20:16:30.887Z"}
+info: Task created by mabilawon@gmail.com: Submission {"timestamp":"2023-10-29T20:30:06.092Z"}
+info: Task created by mabilawon@gmail.com: Bible reading {"timestamp":"2023-10-29T20:46:28.605Z"}
+info: Task created by mabilawon@gmail.com: Pray {"timestamp":"2023-10-29T20:52:28.643Z"}
+info: Task created by mabilawon@gmail.com: Pray {"timestamp":"2023-10-29T20:56:17.810Z"}
+info: Task created by mabilawon@gmail.com: Pray {"timestamp":"2023-10-29T20:57:50.046Z"}
+info: Task created by mabilawon@gmail.com: Pray {"timestamp":"2023-10-29T21:06:56.226Z"}
+info: Task created by mabilawon@gmail.com: Pray {"timestamp":"2023-10-29T21:15:21.655Z"}
