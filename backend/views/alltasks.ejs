@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>All Tasks</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -48,6 +53,7 @@
         margin: 20px auto;
         width: 200px;
       }
+
       #success-message {
         background-color: #4caf50;
         color: white;
@@ -65,30 +71,34 @@
     <% if (isTaskDeleted) { %>
     <div id="success-message" style="display: none"></div>
     <% } %>
-    <ul>
-      <% tasks.forEach(task => { %>
-      <li>
-        <strong>Name:</strong> <%= task.name %><br />
-        <strong>Description:</strong> <%= task.description %><br />
-        <strong>Status:</strong> <%= task.state %><br />
-        <a href="/task/view/<%= task._id %>">View Task</a>
-      </li>
-      <% }); %>
-    </ul>
-    <a href="/auth/dashboard">Back to Dashboard</a>
-    <script>
-      // Check if the query parameter indicates a deleted task
-      const urlParams = new URLSearchParams(window.location.search);
-      const isTaskDeleted = urlParams.get("taskDeleted");
-
-      // Get the success message div
-      const successMessage = document.getElementById("success-message");
-
-      // If a task was deleted, show the success message
-      if (isTaskDeleted === "true") {
-        successMessage.innerText = "Task successfully deleted";
-        successMessage.style.display = "block";
-      }
-    </script>
+    <div class="container">
+      <div class="row">
+        <% tasks.forEach(task => { %>
+        <div class="col-md-6">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5 class="card-title">
+                <strong>Name:</strong> <%= task.name %>
+              </h5>
+              <p class="card-text">
+                <strong>Description:</strong> <%= task.description %>
+              </p>
+              <p class="card-text">
+                <strong>Status:</strong> <%= task.state %>
+              </p>
+              <a href="/task/view/<%= task._id %>" class="btn btn-primary"
+                >View Task</a
+              >
+            </div>
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <a href="/auth/dashboard" class="btn btn-primary mt-3">Back to Dashboard</a>
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

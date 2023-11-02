@@ -2,72 +2,25 @@
 <html>
   <head>
     <title>Create Task</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-
-      .container {
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        text-align: center;
-      }
-
-      .container h1 {
-        font-size: 24px;
-        color: #333;
-      }
-
-      .form-group {
-        margin: 20px 0;
-      }
-
-      label {
-        display: block;
-        font-size: 16px;
-        margin-bottom: 5px;
-      }
-
-      input[type="text"],
-      textarea {
-        width: 100%;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      button[type="submit"] {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        padding: 10px 20px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      button[type="submit"]:hover {
-        background-color: #0056b3;
-      }
-    </style>
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
   </head>
   <body>
-    <div class="container">
-      <h1>Create Task</h1>
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Create Task</h1>
       <form action="/task/create" method="post">
         <div class="form-group">
           <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required />
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            required
+          />
         </div>
 
         <div class="form-group">
@@ -75,16 +28,20 @@
           <textarea
             id="description"
             name="description"
+            class="form-control"
             rows="5"
-            cols="50"
             required
           ></textarea>
         </div>
 
         <div class="form-group">
-          <button type="submit">Create Task</button>
+          <button type="submit" class="btn btn-primary">Create Task</button>
         </div>
       </form>
     </div>
+    <!-- Bootstrap JS and jQuery  -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

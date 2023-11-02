@@ -4,50 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo Homepage</title>
+    <!-- Include Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <style>
+      /* Custom styles */
       body {
         font-family: Arial, sans-serif;
-        background-color: #f0f0f0;
         margin: 0;
         padding: 0;
-      }
-      .container {
-        width: 80%;
-        margin: auto;
-        overflow: hidden;
+        background-image: url("https://source.unsplash.com/1920x1080/?nature");
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center center;
+        color: white;
       }
       header {
-        background: #50b3a2;
+        background: rgba(0, 0, 0, 0.7);
         color: white;
-        padding-top: 30px;
-        min-height: 70px;
-        border-bottom: #e8491d 3px solid;
+        padding: 20px 0;
+        border-bottom: 3px solid #ff4500;
       }
       header a {
         color: #ffffff;
         text-decoration: none;
         text-transform: uppercase;
         font-size: 16px;
+        margin-left: 20px;
       }
-      header li {
-        float: left;
-        display: inline;
-        padding: 0 20px 0 20px;
-      }
-      header #branding {
-        float: left;
+      header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
       header #branding h1 {
         margin: 0;
+        font-size: 36px;
       }
-      header nav {
-        float: right;
-        margin-top: 10px;
+      .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
       }
-      header .highlight,
-      header .current a {
-        color: #e8491d;
-        font-weight: bold;
+      .content {
+        padding: 20px;
+      }
+      .jumbotron {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin-top: 50px;
+      }
+      .feature-box {
+        background: rgba(0, 0, 0, 0.7);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        margin: 20px;
       }
     </style>
   </head>
@@ -58,18 +77,58 @@
           <h1>Todo App</h1>
         </div>
         <nav>
-          <ul>
-            <li><a href="/auth/register">Register</a></li>
-            <li><a href="/auth/login">Login</a></li>
-          </ul>
+          <a href="/auth/register" class="btn btn-primary">Register</a>
+          <a href="/auth/login" class="btn btn-primary">Login</a>
         </nav>
       </div>
     </header>
 
     <div class="container">
-      <h2>Welcome to the Todo app</h2>
-      <p>Keep track of your tasks with the easy to use app.</p>
-      <p>Register or Login to start creating tasks.</p>
+      <div class="content">
+        <div class="jumbotron">
+          <h2>Welcome to the Todo app</h2>
+          <p>
+            Stay organized and productive with our easy-to-use Todo app. Keep
+            track of your tasks, set priorities, and achieve your goals.
+          </p>
+          <a href="/auth/register" class="btn btn-primary">Get Started</a>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="feature-box">
+              <h3>Easy to Use</h3>
+              <p>
+                Our app is designed with simplicity in mind. Start adding tasks
+                and managing your to-do list effortlessly.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box">
+              <h3>Prioritize Tasks</h3>
+              <p>
+                Set task priorities and due dates to help you focus on what
+                matters most and meet your deadlines.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-box">
+              <h3>Stay Organized</h3>
+              <p>
+                Organize your tasks into categories, making it easy to keep
+                track of different aspects of your life.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <!-- Include Bootstrap JS and jQuery (usually at the end of the body) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </body>
 </html>

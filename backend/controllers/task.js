@@ -64,7 +64,7 @@ taskRouter.get("/mytasks", verifyToken, async (req, res) => {
       Task.countDocuments(query), //This is to count the total number of tasks
     ]);
 
-    res.render("allTasks", { tasks: tasks, isTaskDeleted });
+    res.render("alltasks", { tasks: tasks, isTaskDeleted });
   } catch (error) {
     res
       .status(500)
