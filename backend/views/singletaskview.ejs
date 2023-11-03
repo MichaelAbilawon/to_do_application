@@ -10,6 +10,8 @@
         /* Custom styles */
         body {
             font-family: Arial, sans-serif;
+            background-image: url("https://source.unsplash.com/1920x1080/?nature");
+
             background-color: #f4f4f4;
             text-align: center;
             padding: 20px;
@@ -20,7 +22,9 @@
         }
         .task-card {
             background-color: #fff;
+
             border-radius: 10px;
+
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 10px;
@@ -32,8 +36,17 @@
         }
         .task-description {
             font-size: 18px;
-            color: #555;
+            color: #333;
         }
+        .task-priority {
+            font-size: 18px;
+            color: #333;
+        }
+        .task-category {
+            font-size: 18px;
+            color: #333;
+        }
+
         .task-status-select {
             display: flex;
             align-items: center;
@@ -87,8 +100,11 @@
         <h1>Task Details</h1>
         <% if (task) { %>
         <div class="task-card">
-            <div class="task-title"><%= task.name %></div>
-            <div class="task-description"><%= task.description %></div>
+            <div class="task-title">Name: <%= task.name %></div>
+            <div class="task-description"><strong>Description: </strong> <%= task.description %></div>
+            <div class="task-priority"><strong>Priority: </strong> <%= task.priority %></div>
+            <div class="task-category"><strong>Category: </strong><%= task.category %></div>
+
             <div class="task-status-select">
                 <div class="task-status-label">Status:</div>
                 <form action="/task/update/<%= task._id %>" method="post">
@@ -98,6 +114,10 @@
                         <option value="deleted" <%= task.state === "deleted" ? "selected" : "" %>>Deleted</option>
                     </select>
                     <button class="update-button" type="submit">Update</button>
+                    <% if (task.dueDate) { %>
+                      <strong>Due Date:</strong> <%= task.dueDate.toDateString() %><br />
+                    <% } %>
+                    
                 </form>
             </div>
             <form action="/task/delete/<%= task._id %>" method="post">

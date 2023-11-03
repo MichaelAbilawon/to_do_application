@@ -33,6 +33,22 @@
             required
           ></textarea>
         </div>
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+
+        <label for="category">Category:</label>
+        <input
+          type="text"
+          id="category"
+          name="category"
+          placeholder="Category"
+        />
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" name="dueDate" />
 
         <div class="form-group">
           <button type="submit" class="btn btn-primary">Create Task</button>

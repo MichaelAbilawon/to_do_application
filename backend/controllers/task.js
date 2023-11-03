@@ -31,6 +31,9 @@ taskRouter.post("/create", verifyToken, async (req, res) => {
       description,
       state: "pending", // Initially in draft state
       author,
+      category: req.body.category,
+      priority: req.body.priority,
+      due_date: req.body.due_date,
     });
 
     // Save the new task
@@ -230,6 +233,12 @@ taskRouter.post("/update/:taskId", verifyToken, async (req, res) => {
     console.error("Error updating task:", error);
     res.status(500).send("Error updating task");
   }
+});
+
+// Define a route for viewing pending tasks
+taskRouter.get("/tasks/pending", (req, res) => {
+  // Add logic to retrieve and render pending tasks
+  res.render("pending-tasks", { tasks: pendingTasks });
 });
 
 module.exports = taskRouter;

@@ -11,8 +11,7 @@ const ejs = require("ejs");
 app.use(express.json());
 app.use(cookieParser());
 const Task = require("../models/task");
-app.set("view engine", ejs);
-app.set("views", path.join(__dirname, "views"));
+require("dotenv").config();
 
 const router = express.Router();
 const winston = require("winston");
@@ -53,7 +52,7 @@ router.post("/register", async (req, res) => {
   try {
     const isExisting = await user.findOne({ email: req.body.email });
     if (isExisting) {
-      return res.status(400).json({ error: "Email has already been used." });
+      res.render("usedEmail");
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const newUser = new user({
@@ -70,10 +69,11 @@ router.post("/register", async (req, res) => {
         expiresIn: "12h",
       }
     );
-    res.status(201).json({ message: "New user created" });
+    // res.status(201).json({ message: "New user created" });
+    res.render("successfulRegistration", { user: newUser });
   } catch (error) {
     logger.error(`Error in register: ${error.message}`);
-    res.status(500).json({ error: "Registration failed" });
+    res.render("registrationFailed");
   }
 });
 
@@ -86,7 +86,7 @@ router.post("/login", async (req, res) => {
       .findOne({ email: req.body.email })
       .maxTimeMS(15000);
     if (!existingUser) {
-      return res.status(400).json({ error: "Invalid email or password" });
+      res.render("invalid");
     }
     // Check if password is correct
     else {
@@ -95,7 +95,7 @@ router.post("/login", async (req, res) => {
         existingUser.password
       );
       if (!validPass) {
-        return res.status(400).json({ error: "Invalid email or password" });
+        res.render("invalid");
       }
 
       // Generate JWT
